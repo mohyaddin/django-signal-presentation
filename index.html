@@ -218,6 +218,56 @@ pizza_done = django.dispatch.Signal()</code></pre>
                 </ul>
             </section>
         </section>
+        <section>
+            <section>
+                <h3>Short Summary - Django Signal</h3>
+                <p><u>Sender</u>(part of application) wants to notify <u>Receiver</u></p>
+                <p>Signal samples in django: </p>
+                <ul>
+                    <li>model signals: pre_save, pre_delete, <a href="https://docs.djangoproject.com/en/5.1/ref/signals/#post-save">post_save</a></li>
+                    <li>request signals: request_started, request_finished</li>
+                    <li><a href="https://docs.djangoproject.com/en/5.0/ref/signals/">list of django signals by default</a></li>
+                </ul>
+            </section>
+            <section>
+                <p>you should write your receiver in <code>signals.py</code></p>
+                <pre><code>from django.core.signals import request_finished
+from django.dispatch import receiver
+
+
+@receiver(request_finished)
+def my_callback(sender, **kwargs):
+    print("Request finished!")</code></pre>
+            </section>
+            <section>
+                <p>you can use decorator like line 5</p>
+                <pre><code data-line-numbers>from django.core.signals import request_finished
+from django.dispatch import receiver
+
+
+@receiver(request_finished)
+def my_callback(sender, **kwargs):
+    print("Request finished!")
+                </code></pre>
+            </section>
+            <section>
+                <p>or you can connect it with comment method in AppConfig file</p>
+                <pre><code data-line-numbers>from django.apps import AppConfig
+from django.core.signals import request_finished
+
+
+class MyAppConfig(AppConfig):
+    ...
+
+    def ready(self):
+        # Implicitly connect signal handlers decorated with @receiver.
+        from . import signals
+
+        # Explicitly connect a signal handler.
+        request_finished.connect(signals.my_callback)</code></pre>
+            </section>
+
+        </section>
     </div>
 </div>
 
