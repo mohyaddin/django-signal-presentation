@@ -207,6 +207,17 @@ pizza_done = django.dispatch.Signal()</code></pre>
                 <p>... The receiver argument indicates the registered receiver to disconnect. It may be None if dispatch_uid is used to identify the receiver.</p>
             </section>
         </section>
+        <section>
+            <section><h3>Demo</h3><a href="https://www.geeksforgeeks.org/how-to-create-and-use-signals-in-django/">gfg</a></section>
+            <section>
+                <h3>Model Signals</h3>
+                <ul>
+                    <li>pre_save/post_save: This signal works before/after the method save().</li>
+                    <li>pre_delete/post_delete: This signal works before after deleting a model’s instance (method delete()) this signal is thrown.</li>
+                    <li>pre_init/post_init: This signal is thrown before/after instantiating a model (__init__() method).</li>
+                </ul>
+            </section>
+        </section>
     </div>
 </div>
 
